@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import Header from "./Header"
+import { Switch, BrowserRouter, Route } from "react-router-dom"
+import AddPost from "./AddPosts"
+import Home from "./Home"
+import Post from "./Post"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.PureComponent {
+  render() {
+    return (
+      <div>
+        <Header />
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path="/add-post"
+              name="Add Post"
+              render={props => <AddPost {...props} />}
+            />
+            <Route
+              exact
+              path="/:_id"
+              name="Post"
+              render={props => <Post {...props} />}
+            />
+            <Route
+              exact
+              path="/"
+              name="Home"
+              render={props => <Home {...props} />}
+            />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
-
-export default App;
